@@ -1,5 +1,4 @@
-export interface Response<T> {
-    data: T[],
+export interface Response{   
     success: boolean,
     message: string
 }

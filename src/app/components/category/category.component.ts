@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryModel } from 'src/app/models/category';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-category',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
+  categories: CategoryModel[];
+  selectedCategory: CategoryModel;
 
   ngOnInit(): void {
+    this.categoryService.getCategories()
+      .subscribe(response => {
+        this.categories = response.data;
+      })
+  }
+
+  setCategory(category: CategoryModel) {
+    this.selectedCategory = category;
+  }
+
+  getClass(category: CategoryModel){
+    const className = "list-group-item"
+    return category === this.selectedCategory ? `${className} active` : className;
   }
 
 }
