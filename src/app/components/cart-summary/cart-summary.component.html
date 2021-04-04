@@ -1,0 +1,16 @@
+<li *ngIf="cartItems.length > 0" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Your Cart
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li *ngFor="let item of cartItems">
+          <a class="dropdown-item">{{item.product.productName}}
+              <span class="badge rounded-pill bg-warning text-dark">{{item.quantity}}</span>
+              <span class="badge rounded-pill bg-danger" style="float: right;" (click) = "removeItem(item.product.productId)">X</span>
+          </a>
+          
+      </li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item">Go To Cart</a></li>
+    </ul>
+</li>
