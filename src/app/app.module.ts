@@ -12,10 +12,11 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingRoutingModule } from './app-routing.module';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { CartComponent } from './components/cart/cart.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { CartComponent } from './components/cart/cart.component';
     VatAddedPipe,
     FilterProductsPipe,
     CartSummaryComponent,
-    CartComponent
+    CartComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { CartComponent } from './components/cart/cart.component';
     CommonModule,
     AppRoutingRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right",

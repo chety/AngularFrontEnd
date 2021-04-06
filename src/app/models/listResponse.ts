@@ -1,4 +1,4 @@
-import {Response} from "./response"
-export interface ListResponse<T> extends Response {
+import {ResponseModel} from "./response"
+export interface ListResponse<T> extends ResponseModel {
     data : T[]
 }
