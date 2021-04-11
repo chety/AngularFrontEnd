@@ -25,22 +25,28 @@ export class ProductAddComponent implements OnInit {
       unitPrice: ["", Validators.required],
       categoryId: ["", Validators.required],
       unitsInStock: ["", Validators.required],
-    })
+    });
   }
 
   add() {
-    if (this.productAddForm.valid) {
-      const product = { ...this.productAddForm.value };
-      this.productService.add(product).subscribe(response => {
-        console.log(response);
-        this.toastrService.success("Product Added", "Success");
-      }, errResponse => {
-        this.toastrService.error(errResponse.error)
-        console.log(errResponse)
-      })
-    } else {
+    if (!this.productAddForm.valid) {
       this.toastrService.warning("Invalid form value", "Warning");
+      return;
     }
+
+    const product = { ...this.productAddForm.value };
+    this.productService.add(product).subscribe(response => {
+      console.log(response);
+      this.toastrService.success("Product Added", "Success");
+    }, errResponse => {
+      if (errResponse.error?.ValidationErrors?.length > 0) {
+        const messages = errResponse.error.ValidationErrors.map(err => err.ErrorMessage).join("\n");
+        this.toastrService.error(messages, "Validation Error");
+      }else{
+        const errorMessage = typeof errResponse.error === "string" ? errResponse.error : errResponse.error.message;
+        this.toastrService.error(errorMessage, "Add Error");
+      }
+    });
   }
 
 }
